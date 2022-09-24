@@ -1,15 +1,15 @@
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FavoritesContext } from '../../context/FavoritesContext';
-
 import './Palette.css';
 
 const Palette = ({ palette }) => {
-
   const { id, name, colors, liked } = palette
   const { favorites, setFavorites } = useContext(FavoritesContext);
   const [isFavorite, setIsFavorite] = useState(liked);
 
+  //TODO tienes que modificar el like en la paleta
   const handleFavorite = () => {
     setIsFavorite((isFavorite) => !isFavorite);
 
@@ -28,7 +28,6 @@ const Palette = ({ palette }) => {
     );
   }
 
-
   return (
     <div className='palette-container'>
       <div className='palette'>
@@ -45,16 +44,21 @@ const Palette = ({ palette }) => {
           );
         })}
       </div>
-      <div className='fav'>
-        {isFavorite ? (
-          <FaHeart className='fav heart' onClick={handleFavorite}/>
-        ) : (
-          <FaRegHeart className='fav' onClick={handleFavorite}/>
-        )}
+      <div className='palette-actions'>
+        <div className='fav'>
+          {isFavorite ? (
+            <FaHeart className='fav heart' onClick={handleFavorite}/>
+          ) : (
+            <FaRegHeart className='fav' onClick={handleFavorite}/>
+          )}
+        </div>
+        <Link className='btn-see-more' to={`/palette/${id}`}>
+            Ver más
+        </Link>
       </div>
-    </div>
 
-  );
+    </div>
+  )
 }
 
 export default Palette
