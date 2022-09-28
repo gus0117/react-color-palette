@@ -7,6 +7,7 @@ import Favorites from '../../components/Favorite/Favorites';
 import { FavoritesContext } from '../../context/FavoritesContext';
 import { FiltersContext } from '../../context/FiltersContext';
 import { ColorPalettesContext } from '../../context/ColorPalettesContext';
+import palettoLogo from '../../assets/logo.png';
 
 const Home = () => {
     const [tags, setTags] = useState([]);
@@ -18,7 +19,7 @@ const Home = () => {
   
     const { colorPalettes } = useContext(ColorPalettesContext)
 
-        useEffect(() => {
+    useEffect(() => {
             getTags()
             .then((data) => setTags(data))
             .catch((err) => console.log(err));
@@ -51,7 +52,7 @@ const Home = () => {
         <FavoritesContext.Provider value={{favorites, setFavorites}}>
             <FiltersContext.Provider value={{filters, setFilters}}>
             <header>
-                <h1>Color Palette Project</h1>
+                <img src={palettoLogo} alt="Logo" className='logo' />
             </header>
             <div className='main-container'>
                 <Tags tags={tags}/>
